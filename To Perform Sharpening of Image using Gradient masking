@@ -1,0 +1,17 @@
+import cv2
+import numpy as np
+file_path = r"C:\Users\devad\OneDrive\Pictures\Saved Pictures\1303828.jpg"
+image = cv2.imread(file_path)
+if image is not None:
+    gray_image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+    gradient_x = cv2.Sobel(gray_image, cv2.CV_64F, 1, 0, ksize=3)
+    gradient_y = cv2.Sobel(gray_image, cv2.CV_64F, 0, 1, ksize=3)
+    gradient_magnitude = np.sqrt(gradient_x**2 + gradient_y**2)
+    sharpened_image = cv2.addWeighted(gray_image, 1, gradient_magnitude, 1, 0)
+    sharpened_image = cv2.convertScaleAbs(sharpened_image)
+    cv2.imshow('Original Image', image)
+    cv2.imshow('Sharpened Image (Gradient Masking)', sharpened_image)
+    cv2.waitKey(0)
+    cv2.destroyAllWindows()
+else:
+    print("Failed to read the image from the given file path.")

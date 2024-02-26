@@ -1,0 +1,15 @@
+import cv2
+import numpy as np
+image = cv2.imread("image.jpg", cv2.IMREAD_GRAYSCALE)
+if image is not None:
+    sobel_x = cv2.Sobel(image, cv2.CV_64F, 1, 0, ksize=3)
+    sobel_y = cv2.Sobel(image, cv2.CV_64F, 0, 1, ksize=3)
+    magnitude = np.sqrt(sobel_x**2 + sobel_y**2)
+    magnitude_normalized = cv2.normalize(magnitude, None, 0, 255, cv2.NORM_MINMAX, dtype=cv2.CV_8U)
+    _, binary_boundary = cv2.threshold(magnitude_normalized, 50, 255, cv2.THRESH_BINARY)
+    cv2.imshow("Original Image", image)
+    cv2.imshow("Boundary Image", binary_boundary)
+    cv2.waitKey(0)
+    cv2.destroyAllWindows()
+else:
+    print("Failed to read the image from the given file path.")

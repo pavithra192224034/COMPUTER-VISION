@@ -1,0 +1,16 @@
+import cv2
+import numpy as np
+file_path = r"C:\Users\devad\OneDrive\Pictures\Saved Pictures\1303828.jpg"
+image = cv2.imread(file_path)
+if image is not None:
+    gray_image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+    blurred_image = cv2.GaussianBlur(gray_image, (5, 5), 0)
+    mask = cv2.subtract(gray_image, blurred_image)
+    sharpened_image = cv2.add(gray_image, mask)
+    sharpened_image = cv2.convertScaleAbs(sharpened_image)
+    cv2.imshow('Original Image', image)
+    cv2.imshow('Sharpened Image (Unsharp Masking)', sharpened_image)
+    cv2.waitKey(0)
+    cv2.destroyAllWindows()
+else:
+    print("Failed to read the image from the given file path.")

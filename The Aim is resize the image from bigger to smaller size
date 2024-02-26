@@ -1,0 +1,15 @@
+import cv2
+file_path = r"C:\Users\devad\OneDrive\Pictures\Saved Pictures\1303828.jpg"
+image = cv2.imread(file_path)
+if image is not None:
+    cv2.imshow('Original Image', image)
+    cv2.waitKey(0)
+    bigger_image = cv2.resize(image, None, fx=2, fy=2, interpolation=cv2.INTER_LINEAR)
+    cv2.imshow('Bigger Image', bigger_image)
+    cv2.waitKey(0)
+    smaller_image = cv2.resize(image, None, fx=0.5, fy=0.5, interpolation=cv2.INTER_LINEAR)
+    cv2.imshow('Smaller Image', smaller_image)
+    cv2.waitKey(0)
+    cv2.destroyAllWindows()
+else:
+    print("Failed to read the image from the given file path.")

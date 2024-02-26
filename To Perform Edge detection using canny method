@@ -1,0 +1,12 @@
+import cv2
+file_path = r"C:\Users\devad\OneDrive\Pictures\Saved Pictures\1303828.jpg"
+image = cv2.imread(file_path)
+if image is not None:
+    gray_image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+    edges = cv2.Canny(gray_image, threshold1=50, threshold2=150)
+    cv2.imshow('Original Image', image)
+    cv2.imshow('Edges (Canny)', edges)
+    cv2.waitKey(0)
+    cv2.destroyAllWindows()
+else:
+    print("Failed to read the image from the given file path.")

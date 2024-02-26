@@ -1,0 +1,12 @@
+import cv2
+file_path = r"C:\Users\devad\OneDrive\Pictures\Saved Pictures\1303828.jpg"
+image = cv2.imread(file_path)
+if image is not None:
+    cv2.imshow('Original Image', image)
+    cv2.waitKey(0)
+    rotated_180 = cv2.rotate(image, cv2.ROTATE_180)
+    cv2.imshow('Rotated Image (180 degrees)', rotated_180)
+    cv2.waitKey(0)
+    cv2.destroyAllWindows()
+else:
+    print("Failed to read the image from the given file path.")

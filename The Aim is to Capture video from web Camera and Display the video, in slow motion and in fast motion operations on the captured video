@@ -1,0 +1,33 @@
+import cv2
+def play_video_slow(video_capture):
+    while True:
+        ret, frame = video_capture.read()
+        if not ret:
+            break
+        cv2.imshow('Slow Motion Video', frame)
+        if cv2.waitKey(30) & 0xFF == ord('q'):
+            break
+        cv2.waitKey(30)
+def play_video_fast(video_capture):
+    while True:
+        ret, frame = video_capture.read()
+        if not ret:
+            break
+        cv2.imshow('Fast Motion Video', frame)
+        if cv2.waitKey(10) & 0xFF == ord('q'):
+            break
+        cv2.waitKey(10)
+video_capture = cv2.VideoCapture(0)
+if not video_capture.isOpened():
+    print("Error: Unable to open webcam.")
+    exit()
+while True:
+    ret, frame = video_capture.read()
+    if not ret:
+        break
+    cv2.imshow('Original Video', frame)
+    if cv2.waitKey(1) & 0xFF == ord('q'):
+        break
+play_video_slow(video_capture)
+video_capture.release()
+cv2.destroyAllWindows()

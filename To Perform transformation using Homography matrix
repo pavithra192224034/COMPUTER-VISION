@@ -1,0 +1,16 @@
+import cv2
+import numpy as np
+file_path = r"C:\Users\devad\OneDrive\Pictures\Saved Pictures\1303828.jpg"
+image = cv2.imread(file_path)
+if image is not None:
+    cv2.imshow('Original Image', image)
+    cv2.waitKey(0)
+    original_points = np.float32([[316, 86], [700, 215], [28, 410], [495, 645]])
+    output_points = np.float32([[0, 0], [500, 0], [0, 700], [500, 700]])
+    homography_matrix, _ = cv2.findHomography(original_points, output_points)
+    transformed_image = cv2.warpPerspective(image, homography_matrix, (500, 700))
+    cv2.imshow('Transformed Image', transformed_image)
+    cv2.waitKey(0)
+    cv2.destroyAllWindows()
+else:
+    print("Failed to read the image from the given file path.")

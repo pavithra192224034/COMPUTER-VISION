@@ -1,0 +1,28 @@
+import cv2
+
+# File path of the image
+file_path = r"C:\Users\devad\OneDrive\Pictures\Saved Pictures\1303828.jpg"
+
+# Read the image
+image = cv2.imread(file_path)
+
+# Check if the image exists
+if image is not None:
+    # Convert the image to grayscale
+    gray_image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+
+    # Perform edge detection using the Sobel operator along the X-axis
+    sobel_x = cv2.Sobel(gray_image, cv2.CV_64F, 1, 0, ksize=3)
+
+    # Convert the result back to uint8
+    sobel_x = cv2.convertScaleAbs(sobel_x)
+
+    # Display the original image and the edge detection result
+    cv2.imshow('Original Image', image)
+    cv2.imshow('Sobel Edge Detection (X-axis)', sobel_x)
+    cv2.waitKey(0)
+
+    # Close all windows
+    cv2.destroyAllWindows()
+else:
+    print("Failed to read the image from the given file path.")

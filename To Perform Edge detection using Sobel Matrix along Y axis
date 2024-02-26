@@ -1,0 +1,13 @@
+import cv2
+file_path = r"C:\Users\devad\OneDrive\Pictures\Saved Pictures\1303828.jpg"
+image = cv2.imread(file_path)
+if image is not None:
+    gray_image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+    sobel_y = cv2.Sobel(gray_image, cv2.CV_64F, 0, 1, ksize=3)
+    sobel_y = cv2.convertScaleAbs(sobel_y)
+    cv2.imshow('Original Image', image)
+    cv2.imshow('Sobel Edge Detection (Y-axis)', sobel_y)
+    cv2.waitKey(0)
+    cv2.destroyAllWindows()
+else:
+    print("Failed to read the image from the given file path.")
